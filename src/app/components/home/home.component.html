@@ -1,11 +1,2 @@
-<div class="card-columns">
-    <div *ngFor="let a of albumes" class="card">
-        <img class="card-img-top" [src]="a.images[0].url" alt="Card image cap">
-        <div class="card-body">
-            <h5 class="card-title">{{ a.name }}</h5>
-            <p class="card-text">
-                <span *ngFor="let ar of a.artists" class="badge badge-pill badge-primary"> {{ ar.name }} </span>
-            </p>
-        </div>
-    </div>
-</div>
+<app-loading *ngIf="loading"></app-loading>
+<app-tarjetas [items]="albumes"></app-tarjetas>

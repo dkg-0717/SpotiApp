@@ -1,14 +1,5 @@
   <div class="col">
     <input #termino type="text" (keyup)="buscar(termino.value)" class="form-control" placeholder="buscar artista">
   </div>
-    <div class="card-columns p-5">
-    <div *ngFor="let a of artistas" class="card">
-        <img class="card-img-top" [src]="a.images[1].url" alt="Card image cap">
-        <div class="card-body">
-            <h5 class="card-title">{{ a.name }}</h5>
-            <!-- <p class="card-text">
-                <span *ngFor="let ar of a.artists" class="badge badge-pill badge-primary"> {{ ar.name }} </span>
-            </p> -->
-        </div>
-    </div>
-  </div>
+<app-loading *ngIf="loading" class="m-1"></app-loading>  
+<app-tarjetas *ngIf="!loading" [items]="artistas"></app-tarjetas>
