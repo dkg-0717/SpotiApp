@@ -4,20 +4,39 @@ import { SpotifyService } from '../../services/spotify.service';
 
 @Component({
   selector: 'app-artista',
-  templateUrl: './artista.component.html',
-  styles: []
+  templateUrl: './artista.component.html'
 })
 export class ArtistaComponent {
   
+  topTracks: any[] = [];
   artista: any;
+  cargando: boolean = true;
+  cargandoTrack: boolean = true;
 
   constructor(private router: ActivatedRoute, private spotify: SpotifyService) { 
+    
     this.router.params.subscribe(params => {
-      spotify.getArtista(params.id)
-             .subscribe(data => {
-               console.log(data);
-             });
+      this.getArtista(params['id']);
+      this.getTopTracks(params['id']);
     });
+
+  }
+
+  getArtista(id: string) {
+      this.spotify.getArtista(id)
+             .subscribe(data => {
+               this.artista = data;
+               this.cargando = false;
+             });
+  }
+
+  getTopTracks(id: string) {
+      this.spotify.getTopTracks(id)
+             .subscribe(topTracks => {
+               this.topTracks = topTracks;
+               console.log(this.topTracks);
+               this.cargandoTrack = false;
+             });
   }
   
 
