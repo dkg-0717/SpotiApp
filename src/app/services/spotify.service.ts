@@ -17,7 +17,7 @@ export class SpotifyService {
     const url = `https://api.spotify.com/v1/${ query }`;
 
     const headers = new HttpHeaders({
-      'Authorization': 'Bearer BQBZmpYHxPzWGxgI9Wi72LfecKxSnswMgALDiRCYvA6GZeG9TWZhqpBFD173woXY-8cR19pAKY2PMzeqRy0'
+      'Authorization': 'Bearer BQDu6aHHZl-sNbQ8PLzEjhx4AGhQ1GDpR0C5erELzcKx60CjWrhPamHqgXUdNJpqaqiZlu0A3AoV6JfQq0E'
     }); 
     
     return this.http.get( url, { headers });
@@ -44,6 +44,15 @@ export class SpotifyService {
 
   login() {
     return this.http.get('http://127.0.0.1:3000/login');
+  }
+
+  getUser() {
+    return this.getQuery(`users/hyper_dkg-07/playlists`)
+    .pipe(map(data => data['items']));
+  }
+
+  player() {
+    return this.getQuery(`me/player`);
   }
 
   getTracks(cancion) {

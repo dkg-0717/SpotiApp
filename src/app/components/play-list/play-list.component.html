@@ -58,8 +58,8 @@
                         <td> {{ a.name }} </td>
                         <td> {{ a.album.name }} </td>
                         <td>
-                            <!-- <audio [src]="a.preview_url" controls></audio>  -->
-                            <iframe [src]="a.uri | domseguro" width="300" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+                            <audio [src]="a.preview_url" controls></audio>
+                            <!-- <iframe [src]="a.uri | domseguro" width="300" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe> -->
                         </td>
                         <td><button (click)="deleteTrack(i)" class="btn btn-danger">borrar</button></td>
                     </tr>

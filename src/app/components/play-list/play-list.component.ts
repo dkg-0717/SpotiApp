@@ -16,19 +16,19 @@ export class PlayListComponent {
   error: boolean = false;
 
   constructor(private spoti: SpotifyService) {
-    
+
    }
 
    newplayList(cancion) {
       this.agregandoTrack = true;
       this.spoti.getTracks(cancion)
       .subscribe(data => {
+        console.log(data);
         this.cargandoTrack = true;
         this.tracks = data;
       }, (err) => {
         this.error = true;
         this.errorMessage = err.error.error.message;
-        console.log(err.error.error.message);
       });
    }
 
