@@ -1,0 +1,70 @@
+<div *ngIf="error" class="alert alert-danger animated fadeIn">
+    <h3>
+        <p class="text-center">{{ errorMessage }}</p>
+    </h3>
+</div>
+
+<div *ngIf="!error">
+    <div class="col-md-6 offset-md-3">
+        <input #termino type="text" (keyup.enter)="newplayList(termino.value)" class="form-control form-group" placeholder="nombre de la cancion">
+        <button class="btn btn-primary form-control form-group" (click)="newplayList(termino.value)"> Buscar </button>
+    </div>
+
+    <div class="row p-4" *ngIf="cargandoTrack && agregandoTrack">
+        <div class="col">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Foto</th>
+                        <th>Canción</th>
+                        <th>Album</th>
+                        <th>Vista previa</th>
+                        <th>Agregar</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let a of tracks">
+                        <td> <img [src]="a.album.images | noimage" class="img-thumb"> </td>
+                        <td> {{ a.name }} </td>
+                        <td> {{ a.album.name }} </td>
+                        <td>
+                            <!-- <audio [src]="a.preview_url" controls></audio>  -->
+                            <iframe [src]="a.uri | domseguro" width="300" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+                        </td>
+                        <td>
+                            <button (click)="addTrack(a)" class="btn btn-primary">Agregar</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="row p-4" *ngIf="tracksB.length > 0 && !agregandoTrack">
+        <div class="col">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Foto</th>
+                        <th>Canción</th>
+                        <th>Album</th>
+                        <th>Vista previa</th>
+                        <th>Accion</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let a of tracksB; let i = index">
+                        <td> <img [src]="a.album.images | noimage" class="img-thumb"> </td>
+                        <td> {{ a.name }} </td>
+                        <td> {{ a.album.name }} </td>
+                        <td>
+                            <!-- <audio [src]="a.preview_url" controls></audio>  -->
+                            <iframe [src]="a.uri | domseguro" width="300" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+                        </td>
+                        <td><button (click)="deleteTrack(i)" class="btn btn-danger">borrar</button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
